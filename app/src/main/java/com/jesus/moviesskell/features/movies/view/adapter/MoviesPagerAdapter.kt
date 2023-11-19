@@ -2,17 +2,18 @@ package com.jesus.moviesskell.features.movies.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import coil.size.Scale
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.jesus.moviesskell.R
 import com.jesus.moviesskell.data.response.MovieData
 import com.jesus.moviesskell.databinding.MovieItemViewBinding
 import com.jesus.moviesskell.network.Api
 
-class MoviesPagerAdapter(private val movieItemClickListener: MovieItemClickListener)  :
+class MoviesPagerAdapter(private val movieItemClickListener: MovieItemClickListener) :
     PagingDataAdapter<MovieData, MoviesPagerAdapter.ViewHolder>(MovieDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -31,6 +32,7 @@ class MoviesPagerAdapter(private val movieItemClickListener: MovieItemClickListe
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MovieData?, movieItemClickListener: MovieItemClickListener) {
             if (item != null) {
+                val moviePosterURL = Api.IMAGES_BASE_URL + item.posterPath
                 binding.apply {
                     binding.itemContainer.setOnClickListener {
                         movieItemClickListener.onClick(movieId = item.id)
@@ -40,12 +42,12 @@ class MoviesPagerAdapter(private val movieItemClickListener: MovieItemClickListe
                     languageText.text = item.originalLanguage
                     dateText.text = item.releaseDate
 
-                    val image = Api.IMAGES_BASE_URL + item.posterPath
-                    movieImage.load(image) {
-                        crossfade(true)
-                        placeholder(R.drawable.movies_placeholder)
-                        scale(Scale.FILL)
-                    }
+                    val moviePosterUri = moviePosterURL.toUri().buildUpon().scheme("https").build()
+                    Glide.with(movieImage.context)
+                        .load(moviePosterUri)
+                        .transition(withCrossFade())
+                        .placeholder(R.drawable.movies_placeholder)
+                        .into(movieImage)
                 }
             }
         }

@@ -53,15 +53,16 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.5'
     //DI -> Koin
     implementation "io.insert-koin:koin-android:3.2.0"
-    //Retrofit
+    //Network -> Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:okhttp:4.11.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
     //Gson
     implementation 'com.google.code.gson:gson:2.9.0'
-    //Image loading
-    implementation 'io.coil-kt:coil:1.4.0'
+    //Load Images -> Glide
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     //Pagination
     implementation 'androidx.paging:paging-runtime-ktx:3.2.1'
 

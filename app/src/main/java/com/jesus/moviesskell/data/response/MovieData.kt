@@ -14,8 +14,10 @@ data class MovieData(
     val releaseDate: String = "",
     @SerializedName("poster_path")
     val posterPath: String = "",
+    @SerializedName("backdrop_path")
+    val backdropPath: String = "",
     @SerializedName("runtime")
-    val runtime: Int? = null,
+    val runtime: Int = 0,
     @SerializedName("original_language")
     val originalLanguage: String = "en",
     @SerializedName("vote_average")

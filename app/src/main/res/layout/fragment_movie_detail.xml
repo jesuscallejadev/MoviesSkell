@@ -28,12 +28,12 @@
                 android:id="@+id/movieImage"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintDimensionRatio="16:10"
+                android:scaleType="center"
+                app:layout_constraintDimensionRatio="16:8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/movies_placeholder" />
+                android:src="@drawable/movies_placeholder"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

@@ -5,11 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import coil.load
-import coil.size.Scale
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.jesus.moviesskell.R
 import com.jesus.moviesskell.data.response.MovieData
 import com.jesus.moviesskell.databinding.FragmentMovieDetailBinding
@@ -67,13 +68,13 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
     }
 
     private fun setMovieDetails(movie: MovieData?) {
-        val moviePosterURL = Api.IMAGES_BASE_URL + movie?.posterPath
+        val movieImageURL = Api.IMAGES_BASE_URL + movie?.backdropPath
         binding.apply {
-            movieImage.load(moviePosterURL) {
-                crossfade(true)
-                placeholder(R.drawable.movies_placeholder)
-                scale(Scale.FILL)
-            }
+            val movieImageUri = movieImageURL.toUri().buildUpon().scheme("https").build()
+            Glide.with(movieImage.context)
+                .load(movieImageUri)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(movieImage)
             titleText.text = movie?.title
             rateText.text = movie?.voteAverage.toString()
             languageValueText.text = movie?.originalLanguage

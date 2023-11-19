@@ -125,7 +125,7 @@
             android:scaleType="fitXY"
             android:background="@color/black"
             app:shapeAppearanceOverlay="@style/Rounded"
-            app:srcCompat="@drawable/movies_placeholder"
+            android:src="@drawable/movies_placeholder"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
