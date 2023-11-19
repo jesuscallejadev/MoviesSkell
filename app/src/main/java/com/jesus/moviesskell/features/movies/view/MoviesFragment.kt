@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.jesus.moviesskell.R
 import com.jesus.moviesskell.databinding.FragmentMoviesBinding
+import com.jesus.moviesskell.features.movies.view.adapter.MovieItemClickListener
 import com.jesus.moviesskell.features.movies.view.adapter.MoviesPagerAdapter
 import com.jesus.moviesskell.features.movies.viewModel.MoviesViewModel
 import com.jesus.moviesskell.paging.LoaderAdapter
@@ -21,18 +23,17 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     private val viewModel by viewModel<MoviesViewModel>()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentMoviesBinding.inflate(inflater, container, false)
 
-        moviesPagerAdapter = MoviesPagerAdapter()
+        moviesPagerAdapter = MoviesPagerAdapter(movieItemClickListener = MovieItemClickListener {
+            this.onMovieItemTap(movieId = it)
+        })
 
         binding.moviesRv.apply {
             this.adapter = moviesPagerAdapter.withLoadStateHeaderAndFooter(
-                header = LoaderAdapter(),
-                footer = LoaderAdapter()
+                header = LoaderAdapter(), footer = LoaderAdapter()
             )
         }
         this.loadMovies()
@@ -46,12 +47,9 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
             }
         }
     }
+
+    private fun onMovieItemTap(movieId: Int) {
+        val action = MoviesFragmentDirections.goToMovieDetail(movieId = movieId)
+        this.findNavController().navigate(action)
+    }
 }
-
-
-//TODO: ON DETAIL NAV
-/*
-private fun onItemClick(movie: Movie) {
-val action = MovieFragmentDirections.toMovieDetailFragment(movie.id)
-Navigation.findNavController(requireView()).navigate(action)
-}**/

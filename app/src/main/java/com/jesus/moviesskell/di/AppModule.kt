@@ -5,7 +5,7 @@ import com.jesus.moviesskell.network.Api
 import com.jesus.moviesskell.network.services.MoviesApiService
 import com.jesus.moviesskell.data.repository.MoviesRepository
 import com.jesus.moviesskell.data.repository.MoviesRepositoryImpl
-import com.jesus.moviesskell.features.movies.view.adapter.MoviesPagerAdapter
+import com.jesus.moviesskell.features.movieDetail.viewModel.MovieDetailViewModel
 import com.jesus.moviesskell.features.movies.viewModel.MoviesViewModel
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -24,12 +24,7 @@ val appModule = module {
     factory { MoviesPagerSource(get()) }
     single<MoviesRepository> { return@single MoviesRepositoryImpl(get(), get()) }
     viewModel { MoviesViewModel(get()) }
-    //TODO: Pagination
-    //factory { MoviePagingSource(get()) }
-    //TODO: MovieDetailViewModel
-    //viewModel { MovieDetailViewModel(get())}
-    //TODO: MovieDetailRepository
-    //single<MovieDetailRepository> { return@single MovieDetailRepositoryImpl(get()) }
+    viewModel { MovieDetailViewModel(get()) }
 }
 
 //TODO: Isolate network layer in data section

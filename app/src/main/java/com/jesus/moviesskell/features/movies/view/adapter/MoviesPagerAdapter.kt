@@ -12,12 +12,12 @@ import com.jesus.moviesskell.data.response.MovieData
 import com.jesus.moviesskell.databinding.MovieItemViewBinding
 import com.jesus.moviesskell.network.Api
 
-class MoviesPagerAdapter :
+class MoviesPagerAdapter(private val movieItemClickListener: MovieItemClickListener)  :
     PagingDataAdapter<MovieData, MoviesPagerAdapter.ViewHolder>(MovieDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, this.movieItemClickListener)
     }
 
     override fun onCreateViewHolder(
@@ -29,16 +29,19 @@ class MoviesPagerAdapter :
 
     class ViewHolder private constructor(private val binding: MovieItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: MovieData?) {
+        fun bind(item: MovieData?, movieItemClickListener: MovieItemClickListener) {
             if (item != null) {
                 binding.apply {
-                    movieName.text = item.title
-                    rateTxt.text = item.voteAverage.toString()
-                    languageTxt.text = item.originalLanguage
-                    dateTxt.text = item.releaseDate
+                    binding.itemContainer.setOnClickListener {
+                        movieItemClickListener.onClick(movieId = item.id)
+                    }
+                    titleText.text = item.title
+                    rateText.text = item.voteAverage.toString()
+                    languageText.text = item.originalLanguage
+                    dateText.text = item.releaseDate
 
                     val image = Api.IMAGES_BASE_URL + item.posterPath
-                    movieImg.load(image) {
+                    movieImage.load(image) {
                         crossfade(true)
                         placeholder(R.drawable.movies_placeholder)
                         scale(Scale.FILL)
@@ -65,5 +68,8 @@ class MovieDiffCallback : DiffUtil.ItemCallback<MovieData>() {
     override fun areContentsTheSame(oldItem: MovieData, newItem: MovieData): Boolean {
         return oldItem == newItem
     }
+}
 
+class MovieItemClickListener(val clickListener: (movieId: Int) -> Unit) {
+    fun onClick(movieId: Int) = clickListener(movieId)
 }

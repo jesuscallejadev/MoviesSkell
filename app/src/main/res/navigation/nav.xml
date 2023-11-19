@@ -10,7 +10,17 @@
         android:name="com.jesus.moviesskell.features.movies.view.MoviesFragment"
         tools:layout="@layout/fragment_movies" >
         <action
-            android:id="@+id/goToMovieDetail"/>
+            android:id="@+id/goToMovieDetail"
+            app:destination="@id/movieDetailFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.jesus.moviesskell.features.movieDetail.view.MovieDetailFragment"
+        tools:layout="@layout/fragment_movie_detail" >
+        <argument
+            android:name="movieId"
+            app:argType="integer"/>
     </fragment>
 
 </navigation>

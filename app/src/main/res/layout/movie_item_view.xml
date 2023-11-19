@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="2dp">
 
 
@@ -17,48 +18,49 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
+            android:id="@+id/guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="150dp" />
 
         <TextView
-            android:id="@+id/movieName"
+            android:id="@+id/titleText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="sans-serif-light"
-            android:text="Movie Name"
+            tools:text="Movie Name"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imgVote"
+            android:id="@+id/voteImage"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginTop="32sp"
             android:src="@drawable/baseline_star_rate_24"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/movieName" />
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
         <TextView
-            android:id="@+id/rateTxt"
+            android:id="@+id/rateText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="Rate"
+            tools:text="Rate"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imgVote"
-            app:layout_constraintStart_toEndOf="@+id/imgVote"
-            app:layout_constraintTop_toTopOf="@+id/imgVote" />
+            app:layout_constraintBottom_toBottomOf="@+id/voteImage"
+            app:layout_constraintStart_toEndOf="@+id/voteImage"
+            app:layout_constraintTop_toTopOf="@+id/voteImage" />
 
 
         <ImageView
@@ -67,15 +69,15 @@
             android:layout_height="20dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/baseline_language_24"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@id/imgVote" />
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/voteImage" />
 
         <TextView
-            android:id="@+id/languageTxt"
+            android:id="@+id/languageText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="Language"
+            tools:text="Language"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -89,14 +91,14 @@
             android:layout_height="20dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/baseline_date_range_24"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/languageImage" />
 
         <TextView
-            android:id="@+id/dateTxt"
+            android:id="@+id/dateText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
+            tools:text="Date"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -109,7 +111,6 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/imgRoot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/itemContainer"
@@ -118,7 +119,7 @@
         android:layout_marginStart="20dp">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/movieImg"
+            android:id="@+id/movieImage"
             android:layout_width="115dp"
             android:layout_height="160dp"
             android:scaleType="fitXY"

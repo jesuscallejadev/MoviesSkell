@@ -16,8 +16,8 @@ private const val TAG = "LoaderAdapter"
 class LoaderAdapter: LoadStateAdapter<LoaderAdapter.LoaderViewHolder>() {
 
     class LoaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val progressBar = itemView.findViewById<ProgressBar>(R.id.progress_bar)
-        private val errorTextView = itemView.findViewById<TextView>(R.id.error_textView)
+        private val progressBar = itemView.findViewById<ProgressBar>(R.id.dataLoaderProgressBar)
+        private val errorTextView = itemView.findViewById<TextView>(R.id.dataLoaderErrorText)
 
         fun bind(loadState: LoadState) {
             Log.i(TAG, "bind: $loadState")

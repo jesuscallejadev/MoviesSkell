@@ -14,6 +14,13 @@ class MoviesRepositoryImpl(private val movieService: MoviesApiService, private v
         Result.Failure(e.message ?: e.localizedMessage)
     }
 
+    override suspend fun getMovieDetail(id: Int): Result<MovieData> = try {
+        val result = this.movieService.getMovieDetail(id)
+        Result.Success(result)
+    } catch (e: Exception) {
+        Result.Failure(e.message ?: e.localizedMessage)
+    }
+
     override fun getMoviesPagerSource(): MoviesPagerSource {
        return this.moviesPagerSource
     }
