@@ -9,6 +9,7 @@ class SplashViewModel(private val preferencesManager: PreferencesManager) : View
 
     private val _isFirstLaunch = MutableLiveData<Boolean>()
     val isFirstLaunch: LiveData<Boolean> = _isFirstLaunch
+
     fun checkPreferences() {
         _isFirstLaunch.postValue(this.preferencesManager.isFirstLaunch())
     }

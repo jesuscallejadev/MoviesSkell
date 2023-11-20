@@ -1,6 +1,7 @@
 package com.jesus.moviesskell.features.splash.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.jesus.moviesskell.databinding.FragmentSplashBinding
 import com.jesus.moviesskell.features.splash.viewModel.SplashViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+private const val TAG = "SplashFragment"
 class SplashFragment : Fragment(R.layout.fragment_splash) {
     private lateinit var binding: FragmentSplashBinding
     private val viewModel by viewModel<SplashViewModel>()
@@ -27,8 +29,10 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     private fun onEventChange() {
         viewModel.isFirstLaunch.observe(viewLifecycleOwner) { isFirstLaunch ->
             if (isFirstLaunch) {
+                Log.i(TAG, "ShowOnboarding")
                 this.showOnboarding()
             } else {
+                Log.i(TAG, "ShowMovies")
                 this.showMovies()
             }
         }

@@ -1,6 +1,7 @@
 package com.jesus.moviesskell.features.onboarding.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.jesus.moviesskell.features.onboarding.view.adapter.OnBoardingPagerAda
 import com.jesus.moviesskell.features.onboarding.viewModel.OnboardingViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+private const val TAG = "OnboardingFragment"
 class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
     private lateinit var binding: FragmentOnboardingBinding
     private val numberOfPages by lazy { OnboardingScene.values().size }
@@ -24,12 +26,13 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
     ): View {
         binding = FragmentOnboardingBinding.inflate(inflater, container, false)
         this.setUpView(binding = binding)
-        this.addingButtonsClickListeners(binding = binding)
         this.onEventChange()
         return binding.root
     }
 
     private fun setUpView(binding: FragmentOnboardingBinding) {
+        this.onTapEvents(binding = binding)
+        
         with(binding.slider) {
             adapter = OnBoardingPagerAdapter()
             addSlideChangeListener(binding = binding)
@@ -63,12 +66,14 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
         })
     }
 
-    private fun addingButtonsClickListeners(binding: FragmentOnboardingBinding) {
+    private fun onTapEvents(binding: FragmentOnboardingBinding) {
         binding.nextButton.setOnClickListener {
+            Log.i(TAG, "OnNextButtonTap")
             this.goToNextSlide(binding = binding)
         }
 
         binding.startButton.setOnClickListener {
+            Log.i(TAG, "OnStartButtonTap")
             this.viewModel.disableOnboarding()
         }
     }

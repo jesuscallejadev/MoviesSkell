@@ -22,7 +22,6 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val TAG = "MoviesFragment"
-
 class MoviesFragment : Fragment(R.layout.fragment_movies) {
     private lateinit var binding: FragmentMoviesBinding
     private lateinit var moviesPagerAdapter: MoviesPagerAdapter
