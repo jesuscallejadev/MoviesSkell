@@ -6,6 +6,7 @@
     <string name="onboarding_first_description">Movies Skell is your ultimate app for discovering and exploring your favorite movies.</string>
     <string name="onboarding_second_description">Explore Limitless Movie Moments. Scroll, Discover, Enjoy.</string>
     <string name="onboarding_third_description">Discover the details of your favorite movies!</string>
+    <string name="error_loading_movies">Error loading movies</string>
     <string name="error_loading_movie_detail">Error loading movie data</string>
     <string name="original_language">Original Language</string>
     <string name="duration">Duration</string>

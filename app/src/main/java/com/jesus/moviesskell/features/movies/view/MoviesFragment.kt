@@ -66,7 +66,8 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
                 }
 
                 is LoadState.Error -> {
-                    Toast.makeText(context, "Error loading movies", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.error_loading_movies, Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.GONE
                 }
             }
         }
