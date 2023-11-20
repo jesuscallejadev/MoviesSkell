@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -18,6 +19,8 @@ import com.jesus.moviesskell.features.movieDetail.viewModel.MovieDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.jesus.moviesskell.domain.Result
 import com.jesus.moviesskell.network.Api
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 private const val TAG = "MovieDetailFragment"
 class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
@@ -38,9 +41,15 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
             this.findNavController().popBackStack()
         }
 
-        this.viewModel.getMovieDetail(movieId = this.movieId)
         this.onEventChange()
+        this.getMovieDetail(movieId = this.movieId)
         return binding.root
+    }
+
+    private fun getMovieDetail(movieId: Int) {
+        lifecycleScope.launch {
+            viewModel.getMovieDetail(movieId = movieId)
+        }
     }
 
     private fun onEventChange() {
