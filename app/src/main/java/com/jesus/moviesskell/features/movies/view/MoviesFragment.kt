@@ -49,7 +49,6 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     }
 
     private fun onMovieItemTap(movieId: Int) {
-        val action = MoviesFragmentDirections.goToMovieDetail(movieId = movieId)
-        this.findNavController().navigate(action)
+        this.findNavController().navigate(MoviesFragmentDirections.goToMovieDetail(movieId = movieId))
     }
 }

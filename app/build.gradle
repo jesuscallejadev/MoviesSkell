@@ -65,5 +65,11 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     //Pagination
     implementation 'androidx.paging:paging-runtime-ktx:3.2.1'
+    //Lottie -> Animations
+    implementation 'com.airbnb.android:lottie:3.4.1'
+    //UI
+    implementation 'com.tbuonomo:dotsindicator:5.0'
+    implementation 'com.google.android.material:material:1.10.0'
+
 
 }

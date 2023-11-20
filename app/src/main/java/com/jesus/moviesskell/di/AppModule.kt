@@ -7,9 +7,13 @@ import com.jesus.moviesskell.data.repository.MoviesRepository
 import com.jesus.moviesskell.data.repository.MoviesRepositoryImpl
 import com.jesus.moviesskell.features.movieDetail.viewModel.MovieDetailViewModel
 import com.jesus.moviesskell.features.movies.viewModel.MoviesViewModel
+import com.jesus.moviesskell.features.onboarding.viewModel.OnboardingViewModel
+import com.jesus.moviesskell.features.splash.viewModel.SplashViewModel
+import com.jesus.moviesskell.storage.PreferencesManager
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -18,11 +22,14 @@ import java.util.concurrent.TimeUnit
 
 val appModule = module {
     single { interceptor() }
+    single { PreferencesManager(androidContext()) }
     single { okhttpClient(get()) }
     single { retrofit(get()) }
     single { moviesService(get()) }
     factory { MoviesPagerSource(get()) }
     single<MoviesRepository> { return@single MoviesRepositoryImpl(get(), get()) }
+    viewModel { SplashViewModel(get()) }
+    viewModel { OnboardingViewModel(get()) }
     viewModel { MoviesViewModel(get()) }
     viewModel { MovieDetailViewModel(get()) }
 }

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Movies Skell</string>
+    <string name="onboarding_first_title">Welcome!</string>
+    <string name="onboarding_second_title">Dynamic Discovery</string>
+    <string name="onboarding_third_title">Research Movies</string>
+    <string name="onboarding_first_description">Movies Skell is your ultimate app for discovering and exploring your favorite movies.</string>
+    <string name="onboarding_second_description">Explore Limitless Movie Moments. Scroll, Discover, Enjoy.</string>
+    <string name="onboarding_third_description">Discover the details of your favorite movies!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

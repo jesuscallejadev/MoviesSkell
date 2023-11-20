@@ -3,7 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/movieFragment">
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.jesus.moviesskell.features.splash.view.SplashFragment"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/goToOnboarding"
+            app:destination="@id/onboardingFragment"/>
+        <action
+            android:id="@+id/goToMovies"
+            app:destination="@id/movieFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.jesus.moviesskell.features.onboarding.view.OnboardingFragment"
+        tools:layout="@layout/fragment_onboarding" >
+        <action
+            android:id="@+id/goToMovies"
+            app:destination="@id/movieFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/movieFragment"
