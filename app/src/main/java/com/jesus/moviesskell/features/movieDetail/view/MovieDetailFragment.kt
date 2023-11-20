@@ -1,5 +1,6 @@
 package com.jesus.moviesskell.features.movieDetail.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -78,6 +79,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setMovieDetails(movie: Movie?) {
         val movieImageURL = Api.IMAGES_BASE_URL + movie?.backdropPath
         binding.apply {
@@ -90,8 +92,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
             rateText.text = movie?.voteAverage.toString()
             languageValueText.text = movie?.originalLanguage
             releaseDateValueText.text = movie?.releaseDate
-            //TODO: REMOVE HARDCODED
-            durationValueText.text = movie?.runtime.toString() + "min"
+            durationValueText.text = "${movie?.runtime} ${getString(R.string.min)}"
             descriptionValueText.text = movie?.overview
         }
     }
