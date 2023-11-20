@@ -4,17 +4,21 @@ Skeleton App to showcase MVVM Architectural patterns in Android.
 
 * MVVM.
 * Clean Code.
-* DI with Koin.
+* Kotlin.
 * Android View System.
 * Coroutines.
-* DTO .
 * LiveData.
 * Navigation-component.
-* Kotlin.
-* Lottie Animations.
+* Koin(DI).
+* Retrofit(Network).
+* Glide(Load Images).
+* Lottie(Animations).
+* Material Design(UI).
+* DTO.
 * Localized texts to facilitate the addition of new languages.
 * Logs for easy debugging.
 * Unit Tests.
+
 ## Features 
 
 * Onboarding slides with Lottie animations (only during the first launch of the app).
