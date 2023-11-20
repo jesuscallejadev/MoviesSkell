@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.jesus.moviesskell.R
-import com.jesus.moviesskell.data.response.MovieData
 import com.jesus.moviesskell.databinding.MovieItemViewBinding
+import com.jesus.moviesskell.domain.models.movies.Movie
 import com.jesus.moviesskell.network.Api
 
 class MoviesPagerAdapter(private val movieItemClickListener: MovieItemClickListener) :
-    PagingDataAdapter<MovieData, MoviesPagerAdapter.ViewHolder>(MovieDiffCallback()) {
+    PagingDataAdapter<Movie, MoviesPagerAdapter.ViewHolder>(MovieDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
@@ -30,7 +30,7 @@ class MoviesPagerAdapter(private val movieItemClickListener: MovieItemClickListe
 
     class ViewHolder private constructor(private val binding: MovieItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: MovieData?, movieItemClickListener: MovieItemClickListener) {
+        fun bind(item: Movie?, movieItemClickListener: MovieItemClickListener) {
             if (item != null) {
                 val moviePosterURL = Api.IMAGES_BASE_URL + item.posterPath
                 binding.apply {
@@ -62,12 +62,12 @@ class MoviesPagerAdapter(private val movieItemClickListener: MovieItemClickListe
     }
 }
 
-class MovieDiffCallback : DiffUtil.ItemCallback<MovieData>() {
-    override fun areItemsTheSame(oldItem: MovieData, newItem: MovieData): Boolean {
+class MovieDiffCallback : DiffUtil.ItemCallback<Movie>() {
+    override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: MovieData, newItem: MovieData): Boolean {
+    override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
         return oldItem == newItem
     }
 }

@@ -15,11 +15,11 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.jesus.moviesskell.R
 import com.jesus.moviesskell.data.response.MovieData
 import com.jesus.moviesskell.databinding.FragmentMovieDetailBinding
+import com.jesus.moviesskell.domain.models.movies.Movie
 import com.jesus.moviesskell.features.movieDetail.viewModel.MovieDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.jesus.moviesskell.domain.Result
+import com.jesus.moviesskell.domain.models.result.Result
 import com.jesus.moviesskell.network.Api
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 private const val TAG = "MovieDetailFragment"
@@ -54,16 +54,18 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
 
     private fun onEventChange() {
         viewModel.movieStatus.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.errorText.visibility = View.GONE
                 }
+
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.errorText.visibility = View.GONE
-                    setMovieDetails(movie = it.data)
+                    this.setMovieDetails(movie = it.data)
                 }
+
                 is Result.Failure -> {
                     binding.progressBar.visibility = View.GONE
                     binding.errorText.visibility = View.VISIBLE
@@ -76,7 +78,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
         }
     }
 
-    private fun setMovieDetails(movie: MovieData?) {
+    private fun setMovieDetails(movie: Movie?) {
         val movieImageURL = Api.IMAGES_BASE_URL + movie?.backdropPath
         binding.apply {
             val movieImageUri = movieImageURL.toUri().buildUpon().scheme("https").build()

@@ -1,6 +1,7 @@
 package com.jesus.moviesskell.data.response
 
 import com.google.gson.annotations.SerializedName
+import com.jesus.moviesskell.domain.models.movies.Movie
 
 data class MovieData(
     @SerializedName("id")
@@ -23,3 +24,18 @@ data class MovieData(
     @SerializedName("vote_average")
     val voteAverage: Double = 0.0,
 )
+
+//DTO
+fun MovieData.toDomainModel(): Movie {
+    return Movie(
+        id = id,
+        title = title,
+        overview = overview,
+        releaseDate = releaseDate,
+        posterPath = posterPath,
+        backdropPath = backdropPath,
+        runtime = runtime,
+        originalLanguage = originalLanguage,
+        voteAverage = voteAverage
+    )
+}

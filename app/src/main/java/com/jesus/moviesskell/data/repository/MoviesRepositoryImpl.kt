@@ -1,27 +1,44 @@
 package com.jesus.moviesskell.data.repository
 
 import MoviesPagerSource
+import android.util.Log
 import com.jesus.moviesskell.network.services.MoviesApiService
-import com.jesus.moviesskell.data.response.MovieData
-import com.jesus.moviesskell.domain.Result
+import com.jesus.moviesskell.data.response.toDomainModel
+import com.jesus.moviesskell.domain.models.result.Result
+import com.jesus.moviesskell.domain.models.movies.Movie
+import java.io.IOException
 
-class MoviesRepositoryImpl(private val movieService: MoviesApiService, private val moviesPagerSource: MoviesPagerSource): MoviesRepository {
-    override suspend fun getMovies(page: Int): Result<List<MovieData>> = try {
-        val result = this.movieService.getMovies(page).results
-        if (result.isEmpty()) Result.Empty()
-        else Result.Success(result)
+private const val TAG = "MoviesRepositoryImpl"
+class MoviesRepositoryImpl(
+    private val movieService: MoviesApiService,
+    private val moviesPagerSource: MoviesPagerSource
+) : MoviesRepository {
+    override suspend fun getMovies(page: Int): Result<List<Movie>> = try {
+        val result = movieService.getMovies(page).results.map { it.toDomainModel() }
+        when {
+            result.isEmpty() -> Result.Empty()
+            else -> Result.Success(result)
+        }
+    } catch (e: IOException) {
+        Log.i(TAG, "Network Error")
+        Result.Failure("Network Error: ${e.message}")
     } catch (e: Exception) {
-        Result.Failure(e.message ?: e.localizedMessage)
+        Log.i(TAG, "Unknown Error")
+        Result.Failure("Unknown Error: ${e.message ?: e.localizedMessage}")
     }
 
-    override suspend fun getMovieDetail(id: Int): Result<MovieData> = try {
-        val result = this.movieService.getMovieDetail(id)
+    override suspend fun getMovieDetail(id: Int): Result<Movie> = try {
+        val result = movieService.getMovieDetail(id).toDomainModel()
         Result.Success(result)
+    } catch (e: IOException) {
+        Log.i(TAG, "Network Error")
+        Result.Failure("Network Error: ${e.message}")
     } catch (e: Exception) {
-        Result.Failure(e.message ?: e.localizedMessage)
+        Log.i(TAG, "Unknown Error")
+        Result.Failure("Unknown Error: ${e.message ?: e.localizedMessage}")
     }
 
     override fun getMoviesPagerSource(): MoviesPagerSource {
-       return this.moviesPagerSource
+        return this.moviesPagerSource
     }
 }
