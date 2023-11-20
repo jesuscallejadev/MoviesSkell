@@ -23,7 +23,33 @@ data class MovieData(
     val originalLanguage: String = "en",
     @SerializedName("vote_average")
     val voteAverage: Double = 0.0,
-)
+) {
+    companion object {
+        fun createTestInstance(
+            id: Int = 1,
+            title: String = "Test Movie",
+            overview: String = "This is a test movie.",
+            releaseDate: String = "2022-01-01",
+            posterPath: String = "/test_poster.jpg",
+            backdropPath: String = "/test_backdrop.jpg",
+            runtime: Int = 120,
+            originalLanguage: String = "en",
+            voteAverage: Double = 8.0
+        ): MovieData {
+            return MovieData(
+                id = id,
+                title = title,
+                overview = overview,
+                releaseDate = releaseDate,
+                posterPath = posterPath,
+                backdropPath = backdropPath,
+                runtime = runtime,
+                originalLanguage = originalLanguage,
+                voteAverage = voteAverage
+            )
+        }
+    }
+}
 
 //DTO
 fun MovieData.toDomainModel(): Movie {
