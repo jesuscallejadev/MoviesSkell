@@ -7,7 +7,7 @@ import com.jesus.moviesskell.R
 enum class OnboardingScene(
     @StringRes val title: Int,
     @StringRes val description: Int,
-    @DrawableRes val animation: Int
+    val animation: Int
 ) {
 
     FIRST(R.string.onboarding_first_title, R.string.onboarding_first_description, R.raw.movies),

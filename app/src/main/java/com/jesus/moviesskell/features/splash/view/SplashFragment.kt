@@ -13,7 +13,7 @@ import com.jesus.moviesskell.features.splash.viewModel.SplashViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val TAG = "SplashFragment"
-class SplashFragment : Fragment(R.layout.fragment_splash) {
+class SplashFragment : Fragment() {
     private lateinit var binding: FragmentSplashBinding
     private val viewModel by viewModel<SplashViewModel>()
 

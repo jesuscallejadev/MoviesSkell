@@ -9,5 +9,5 @@ data class Movie(
     val backdropPath: String = "",
     val runtime: Int = 0,
     val originalLanguage: String = "en",
-    val voteAverage: Double = 0.0
+    val voteAverage: Double = 10.0
 )

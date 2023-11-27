@@ -16,7 +16,7 @@ data class MovieData(
     @SerializedName("poster_path")
     val posterPath: String = "",
     @SerializedName("backdrop_path")
-    val backdropPath: String = "",
+    val backdropPath: String? = "",
     @SerializedName("runtime")
     val runtime: Int = 0,
     @SerializedName("original_language")
@@ -59,9 +59,13 @@ fun MovieData.toDomainModel(): Movie {
         overview = overview,
         releaseDate = releaseDate,
         posterPath = posterPath,
-        backdropPath = backdropPath,
+        backdropPath = checkBackdropImage(backdropPath),
         runtime = runtime,
         originalLanguage = originalLanguage,
         voteAverage = voteAverage
     )
+}
+
+fun checkBackdropImage(image: String?): String {
+    return image ?: "harcooded"
 }
